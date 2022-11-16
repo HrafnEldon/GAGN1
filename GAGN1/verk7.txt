@@ -1,0 +1,16 @@
+1. SELECT genres.Name, COUNT(*) AS "Number of songs in Group" FROM genres INNER JOIN tracks ON genres.GenreId = tracks.GenreId GROUP BY genres.GenreId;
+
+2.SELECT artists.Name AS "Artist Name", COUNT(*) AS "Number of songs" FROM artists INNER JOIN albums ON artists.ArtistId = albums.ArtistId 
+INNER JOIN tracks ON albums.AlbumId = tracks.AlbumId WHERE artists.Name = "AC/DC" GROUP BY artists.Name;
+
+3. SELECT artists.Name AS "Artist", COUNT(*) AS "Number of songs from each artist", CASE WHEN COUNT(*) > 10 THEN "Active" ELSE "Inactive" END AS "Status" FROM artists
+ INNER JOIN albums ON artists.ArtistId = albums.ArtistId INNER JOIN tracks ON albums.AlbumId = tracks.AlbumId GROUP BY artists.ArtistId ORDER BY artists.Name LIMIT 1;
+
+4. SELECT CASE WHEN genres.Name = "Pop" THEN "Justin Bieber" ELSE genres.Name END AS "Genre", tracks.Name AS "Song Title" 
+FROM genres INNER JOIN tracks ON genres.GenreId = tracks.GenreId ORDER BY tracks.Name LIMIT 25;
+
+5. SELECT DISTCINT customers.FirstName || " " || customers.LastName AS "Customer" FROM customers 
+INNER JOIN invoices ON customers.CustomerId = invoices.CustomerId INNER JOIN invoice_items
+ON invoices.InvoiceId = invoice_items.InvoiceId INNER JOIN tracks ON invoice_items.TrackId = tracks.TrackId INNER JOIN 
+albums ON tracks.AlbumId = albums.AlbumId INNER JOIN artists ON albums.ArtistId = artists.ArtisId WHERE artists.Name 
+= "AC/DC" ORDER BY customers.FirstName LIMIT 25;
